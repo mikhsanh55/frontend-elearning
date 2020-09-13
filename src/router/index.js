@@ -13,6 +13,11 @@ let router = new Router({
   mode : 'history',
   routes: [
     {
+      path: '/',
+      name: 'Dashboard',
+      component: Kelas
+    },
+    {
       path: '/kelas',
       name: 'Kelas',
       component: Kelas
@@ -52,6 +57,16 @@ let router = new Router({
       component: HelloWorld
     }
   ]
+})
+
+router.beforeEach((to, from, next) => {
+  // redirect to login page if not logged in and trying to access a restricted page
+  const loggedIn = localStorage.getItem('user');
+  if (to.path != '/login' && !loggedIn) {
+    return next('/login');
+  }
+
+  next();
 })
 
 export default router
