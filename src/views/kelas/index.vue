@@ -52,11 +52,10 @@
 	                    		 <div class="uk-child-width-1-3@s" uk-grid>
 	                    		 	<!-- Loop List Mata Pelajaran -->
 	            	                   <div v-for="mapel in mapels">
-	                                        <router-link :to="'#' + mapel.url">
+	                                        <router-link :to="mapel.url">
 	                                            <div class="course-card">
 	                                                <div class="course-card-thumbnail ">
 	                                                    <img :src="getPict(mapel.img)">
-	                                                    <span class="play-button-trigger"></span>
 	                                                </div>
 	                                                <div class="course-card-body">
 	                                                    <div class="course-card-info">
@@ -109,14 +108,14 @@
 			},
 			getListMapel() {
 				this.mapels = [
-					{url: '/mapel/192j9s128us', img: '1.png', name: 'Pendidikan Islam', keterangan: ''},
-					{url: '/mapel/192j9s128us', img: '2.png', name: 'Bahasa Indonesia', keterangan: ''},
-					{url: '/mapel/192j9s128us', img: '3.png', name: 'Bahasa Inggris', keterangan: ''},
-					{url: '/mapel/192j9s128us', img: '4.png', name: 'Matematika', keterangan: ''},
-					{url: '/mapel/192j9s128us', img: '5.png', name: 'Fisika', keterangan: ''},
-					{url: '/mapel/192j9s128us', img: '6.png', name: 'Kimia', keterangan: ''},
-					{url: '/mapel/192j9s128us', img: '7.png', name: 'Biologi', keterangan: ''},
-					{url: '/mapel/192j9s128us', img: '8.png', name: 'Seni Budaya', keterangan: ''},
+					{url: '/materi/192j9s128us', img: '1.png', name: 'Pendidikan Islam', keterangan: ''},
+					{url: '/materi/192j9s128us', img: '2.png', name: 'Bahasa Indonesia', keterangan: ''},
+					{url: '/materi/192j9s128us', img: '3.png', name: 'Bahasa Inggris', keterangan: ''},
+					{url: '/materi/192j9s128us', img: '4.png', name: 'Matematika', keterangan: ''},
+					{url: '/materi/192j9s128us', img: '5.png', name: 'Fisika', keterangan: ''},
+					{url: '/materi/192j9s128us', img: '6.png', name: 'Kimia', keterangan: ''},
+					{url: '/materi/192j9s128us', img: '7.png', name: 'Biologi', keterangan: ''},
+					{url: '/materi/192j9s128us', img: '8.png', name: 'Seni Budaya', keterangan: ''},
 				]
 			},
 			getPict(imageName) {
@@ -127,6 +126,7 @@
 			this.getData()
 			this.getMenu()
 			this.getListMapel()
+			console.warn(localStorage.getItem('user'))
 		}
 	}
 </script>

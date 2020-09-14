@@ -20348,7 +20348,10 @@ em[class~=mm-counter]+a[class~=mm-fullsubopen]+span {
 [class~=simplebar-offset],[class~=simplebar-mask] {
 	top:0;
 }
-select[class~=selectpicker],select[class~=bs-select-hidden] {
+select[class~=selectpicker] {
+	
+}
+select[class~=bs-select-hidden] {
 	display:none !important;
 }
 [class~=bootstrap-select][class~=form-control] {

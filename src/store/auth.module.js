@@ -14,16 +14,15 @@ export const auth = {
 	state: initialState,
 	actions: {
 		login({ commit }, user) {
-			return authService.login(user).then(
-				user => {
-					commit('LOGIN_SUCCESS', user)
-					return Promise.resolve(user)
-				},
-				error => {
-					commit('LOGIN_FAIlURE')
-					return Promise.reject(error)
-				}
-			)
+			return authService.login(user)
+			.then(user => {
+				commit('LOGIN_SUCCESS', user) // update state user with loggedIn data
+				return Promise.resolve(user) // continue user data to view
+			})
+			.catch(e => {
+				commit('LOGIN_FAIlURE')
+				return Promise.reject(e)
+			})
 		},
 		logout({ commit }) {
 			authService.logout()
@@ -42,6 +41,11 @@ export const auth = {
 		LOGOUT(state) {
 			state.status.loggedIn = false
 			state.user = null
+		}
+	},
+	getters: {
+		getStatusLoggin: state => {
+			return state.status.loggedIn
 		}
 	}
 }

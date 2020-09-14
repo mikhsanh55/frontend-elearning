@@ -6,6 +6,12 @@ const API_URL = 'https://localhost:8000'
 class UserService {
 	getProfile() {
 		return axios.get(API_URL + '/profile', {headers: authHeader()})
+	},
+	getNavigationMenu() {
+
+	},
+	getMapel() {
+		
 	}
 }
 

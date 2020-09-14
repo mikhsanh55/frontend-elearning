@@ -3,6 +3,8 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import store from './store'
+import VeeValidate from 'vee-validate'
 
 import JQuery from 'jquery'
 
@@ -19,12 +21,31 @@ import 	'@/js/jquery-3.3.1.min.js'
 import 	'@/js/simplebar.js'
 import 	'@/js/main.js'
 
+// Import Font Awesome
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import {
+  faHome,
+  faUser,
+  faUserPlus,
+  faSignInAlt,
+  faSignOutAlt
+} from '@fortawesome/free-solid-svg-icons'
+
+// Import Swal
+import VueSwal from 'vue-swal'
+
+import VModal from 'vue-js-modal'
+
 Vue.config.productionTip = false
+Vue.use(VeeValidate)
+Vue.use(VueSwal)
+Vue.use(VModal)
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
-  components: { App },
-  template: '<App/>'
+  store,
+  render: h => h(App)
 })

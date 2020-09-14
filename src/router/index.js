@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import Home from '@/components/Home'
-import Login from '@/components/Login'
+import Login from '@/views/auth/Login'
 import Header from  '@/components/Header'
 import Beranda from '@/components/Beranda'
 import Footer from '@/components/Footer'
@@ -50,23 +50,44 @@ let router = new Router({
       name : '/Footer',
       component :Footer
    },
-
-    {
+   {
       path: '/',
       name: 'HelloWorld',
       component: HelloWorld
-    }
+   },
+   {
+      path: '/materi/:kode_mapel',
+      component: {
+        render(c) {
+          return c('router-view')
+        }
+      },
+      children: [
+        {
+          path: '',
+          name: 'Materi',
+          component: () => import('@/views/materi/index')
+        },
+        {
+          path: 'detail/:id',
+          name: 'DetailMateri',
+          component: () => import('@/views/materi/detail')
+        }
+      ]
+   }
   ]
 })
 
 router.beforeEach((to, from, next) => {
   // redirect to login page if not logged in and trying to access a restricted page
-  const loggedIn = localStorage.getItem('user');
-  if (to.path != '/login' && !loggedIn) {
-    return next('/login');
+  const publicPages = ['/login', '/home']
+  const loggedIn = localStorage.getItem('user')
+  const authRequired = !publicPages.includes(to.path)
+  if (authRequired && !loggedIn) {
+    next()
   }
 
-  next();
+  next()
 })
 
 export default router
