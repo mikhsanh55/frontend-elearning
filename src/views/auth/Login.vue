@@ -76,11 +76,12 @@
             </div>
         </div>
     </div>
-
+    <Footer />
 	</section>
 </template>
 <script type="text/javascript">
 	import User from '../../models/User'
+    import Footer from '@/components/Footer'
 
 	export default {
 		name : 'Login',
@@ -95,6 +96,9 @@
                     password: false
                 }
             }
+        },
+        components: {
+            Footer
         },
         computed: {
             loggedIn() {

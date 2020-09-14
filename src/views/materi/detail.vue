@@ -60,10 +60,12 @@
 			  <iframe class="embed-responsive-item" :src="data.video" allowfullscreen></iframe>
 			</div>
 	    </modal>
+	    <Footer />
 	</section>
 </template>
 <script type="text/javascript">
 	import Header from '@/components/Header'
+	import Footer from '@/components/Footer'
 	export default {
 		name: 'DetailMateri',
 		data() {
@@ -73,7 +75,8 @@
 			}
 		},
 		components: {
-			Header
+			Header,
+			Footer
 		},
 		methods: {
 			viewVideo() {
