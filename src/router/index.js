@@ -7,6 +7,7 @@ import Header from  '@/components/Header'
 import Beranda from '@/components/Beranda'
 import Footer from '@/components/Footer'
 import Kelas from '@/views/kelas/index'
+import Jadwal from '@/views/jadwal/index'
 
 Vue.use(Router)
 let router = new Router({
@@ -54,6 +55,21 @@ let router = new Router({
       path: '/',
       name: 'HelloWorld',
       component: HelloWorld
+   },
+   {
+      path: '/jadwal/siswa',
+      component: {
+        render(c) {
+          return c('router-view')
+        }
+      },
+      children: [
+        {
+          path: '',
+          name: 'Jadwal',
+          component: Jadwal
+        }
+      ]
    },
    {
       path: '/materi/:kode_mapel',

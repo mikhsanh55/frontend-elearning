@@ -74,7 +74,7 @@
 	                                            </div>
 	                                        </router-link>
 	                                    </div>
-	                             </div>
+	                             </div> 
 	                    	</li>
 	                    </ul>
 	                </div>
