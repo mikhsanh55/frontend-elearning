@@ -55,9 +55,11 @@
 	    </div>
 
 	    <!-- Modal for Video -->
-	    <modal name="modal-video" :adaptive="true">
+	    <modal name="modal-video" :resizeable="true" style="width: 500px;height: 600px;" >
 	    	<div class="embed-responsive embed-responsive-16by9">
-			  <iframe class="embed-responsive-item" :src="data.video" allowfullscreen></iframe>
+
+			  <iframe class="mb-4" :src="data.video" style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+			  <iframe class="mb-4" :src="data.video" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
 			</div>
 	    </modal>
 	    <Footer />

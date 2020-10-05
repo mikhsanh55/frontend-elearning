@@ -109,8 +109,8 @@
                                 </a>
                                 <!-- User menu -->
                                 <ul class="dropdown-user-menu">
-                                    <li><a href="page-login.html">
-                                            <i class="icon-feather-log-out"></i> Sing Out</a>
+                                    <li><a href="#" @click.prevent="logout()">
+                                            <i class="icon-feather-log-out"></i> Log Out</a>
                                     </li>
                                 </ul>
                             </div>
@@ -126,7 +126,28 @@
 </template>
 <script type="text/javascript">
 	export default {
-		name : 'Header'
+		name : 'Header',
+        methods: {
+            logout() {
+                this.$swal({
+                    title: 'Anda yakin?',
+                    icon: 'warning',
+                    buttons: true,
+                    dangerMode: true
+                })
+                .then(out => {
+                    if(out) {
+                        this.$store.dispatch('auth/logout')
+                        .then(() => {
+                            this.$swal.close()
+                            this.$router.replace('/login')
+                        })
+                    }
+                    else {
+                        this.$swal.close()
+                    }
+                })
+            }
+        }
 	}
-
 </script>

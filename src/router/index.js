@@ -27,14 +27,17 @@ let router = new Router({
   		path: '/home',
   		name: 'Home',
   		component :Home
-  	},
-
+    },
    {
       path : '/login',
       name : 'Login',
       component :Login
    },
-
+   {
+      path: '/forgot-password',
+      name: 'ForgotPassword',
+      component: () => import('@/views/auth/lupa-password')
+   },
    {
       path : '/header',
       name : '/Header',
@@ -100,7 +103,7 @@ router.beforeEach((to, from, next) => {
   const loggedIn = localStorage.getItem('user')
   const authRequired = !publicPages.includes(to.path)
   if (authRequired && !loggedIn) {
-    next()
+    next('/login')
   }
 
   next()

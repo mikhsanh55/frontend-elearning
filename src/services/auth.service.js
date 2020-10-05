@@ -1,7 +1,6 @@
 import axios from 'axios'
-
-const API_URL = 'https://localhost:8000'
-
+import authHeader from './auth-header'
+const API_URL = localStorage.getItem('API_URL')
 /*
 * This helper class is using for auth stuff
 */
@@ -9,9 +8,11 @@ class AuthService {
 	login(user) {
 		return new Promise((resolve, reject) => {
 			axios
-			.post(API_URL + '/login', {
-				username: user.username,
+			.post(API_URL + 'auth/login', {
+				email: user.email,
 				password: user.password
+			}, {
+				headers: authHeader()
 			})
 			.then(response => {
 				if(response.status) {
@@ -23,7 +24,6 @@ class AuthService {
 			.catch(e => reject(e))
 		})
 	}
-
 	logout() {
 		localStorage.removeItem('user')
 	}

@@ -22371,29 +22371,6 @@ select[class~=bs-select-hidden] {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
 @media (min-width: 1220px){
   .btn-menu-close::before {
   display:none
@@ -22416,4 +22393,16 @@ select[class~=bs-select-hidden] {
   .admin-panel .searchbox {
     min-width: 226px; 
 }
+}
+
+.btn-primary {
+	background-color: #1e824c !important;
+	border:1px solid #1e824c !important;
+}
+.bg-sman5 {
+ 	background-color: #1e824c !important;
+	border:1px solid #1e824c !important;	
+ }
+.text-color {
+	color: #1e824c !important;
 }

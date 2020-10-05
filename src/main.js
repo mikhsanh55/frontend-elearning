@@ -42,6 +42,9 @@ Vue.use(VeeValidate)
 Vue.use(VueSwal)
 Vue.use(VModal)
 
+// Set localStorage API URL
+// localStorage.setItem('API_URL', 'https://api.lms-sman5bdg.online/');
+localStorage.setItem('API_URL', 'http://localhost:8000/');
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

@@ -1,12 +1,14 @@
 import authService from '../services/auth.service'
-
+import UserService from '../services/user.service'
 const user = JSON.parse(localStorage.getItem('user'))
 const initialState = user ? {
 	status: {loggedIn: true},
-	user
+	user,
+	navMenu: []
 } : {
 	status: {loggedIn: false},
-	user: null
+	user: null,
+	navMenu: []
 }
 
 export const auth = {
@@ -27,6 +29,15 @@ export const auth = {
 		logout({ commit }) {
 			authService.logout()
 			commit('LOGOUT')
+			return Promise.resolve()
+		},
+		loginPassed({commit}, user) {
+			commit('LOGIN_SUCCESS', user)
+			localStorage.setItem('user', JSON.stringify(user))
+			return user
+		},
+		getNav({commit}) {
+			commit('GET_NAV')
 		}
 	},
 	mutations: {
@@ -41,11 +52,16 @@ export const auth = {
 		LOGOUT(state) {
 			state.status.loggedIn = false
 			state.user = null
+		},
+		GET_NAV(state) {
+			state.navMenu = UserService.getNavigationMenu()
 		}
 	},
 	getters: {
 		getStatusLoggin: state => {
 			return state.status.loggedIn
-		}
+		},
+		getInfoUser: state => state.user,
+		getNavMenu: state => state.navMenu
 	}
 }
