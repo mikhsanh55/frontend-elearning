@@ -91,6 +91,11 @@ let router = new Router({
           path: 'detail/:id',
           name: 'DetailMateri',
           component: () => import('@/views/materi/detail')
+        },
+        {
+          path: 'diskusi/:id_kelas',
+          name: 'DiskusiMateri',
+          component: () => import('@/views/materi/diskusi')
         }
       ]
    }

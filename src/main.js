@@ -9,7 +9,7 @@ import VeeValidate from 'vee-validate'
 import JQuery from 'jquery'
 
 window.$ = JQuery
-
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import  '@/styles/style.css'
 import  '@/styles/night-mode.css'
 import  '@/styles/framework.css'
@@ -41,6 +41,10 @@ Vue.config.productionTip = false
 Vue.use(VeeValidate)
 Vue.use(VueSwal)
 Vue.use(VModal)
+// Install BootstrapVue
+Vue.use(BootstrapVue)
+// Optionally install the BootstrapVue icon components plugin
+Vue.use(IconsPlugin)
 
 // Set localStorage API URL
 // localStorage.setItem('API_URL', 'https://api.lms-sman5bdg.online/');

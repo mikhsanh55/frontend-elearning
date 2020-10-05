@@ -42,7 +42,7 @@
 	              						</tr>
 	              						<tr>
 	              							<td>
-	              								<a href="#" class="btn btn-block btn-info btn-sm">Forum Chat</a>	
+	              								<router-link to="/materi/192j9s128us/diskusi/192j9s128us" class="btn btn-block btn-info btn-sm">Forum Chat</router-link>	
 	              							</td>
 	              						</tr>
 	              					</table>
@@ -55,19 +55,22 @@
 	    </div>
 
 	    <!-- Modal for Video -->
-	    <modal name="modal-video" :resizeable="true" style="width: 500px;height: 600px;" >
-	    	<div class="embed-responsive embed-responsive-16by9">
-
-			  <iframe class="mb-4" :src="data.video" style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
-			  <iframe class="mb-4" :src="data.video" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+	    <b-modal title="Video" id="video-modal">
+	    	<div class="embed-responsive embed-responsive-16by9 mb-3">
+				<iframe class="mb-4" :src="data.video" style="position:absolute;top:0;left:0;width:100%;height:100%;" allowFullScreen></iframe>  
 			</div>
-	    </modal>
+			<div class="embed-responsive embed-responsive-16by9 mb-3">
+				<iframe class="mb-4" :src="data.video" style="position:absolute;top:0;left:0;width:100%;height:100%;" allowFullScreen></iframe>  
+			</div>
+	    </b-modal>
 	    <Footer />
 	</section>
 </template>
 <script type="text/javascript">
 	import Header from '@/components/Header'
 	import Footer from '@/components/Footer'
+	import {BModal, VBModal} from 'bootstrap-vue'
+
 	export default {
 		name: 'DetailMateri',
 		data() {
@@ -78,11 +81,12 @@
 		},
 		components: {
 			Header,
-			Footer
+			Footer,
+			'b-modal': BModal
 		},
 		methods: {
 			viewVideo() {
-				this.$modal.show('modal-video')
+				this.$bvModal.show('video-modal')
 			},
 			getDetail() {
 				this.data = {
