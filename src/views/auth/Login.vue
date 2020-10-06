@@ -17,7 +17,11 @@
                         <p class="my-2">LMS SMAN 5 BANDUNG</p>
                     </div>
                     <form @submit.prevent="handleLogin">
-
+                        <div class="form-group">
+                            <div v-if="message" class="alert alert-danger" role="alert">
+                                {{message}}
+                            </div>
+                        </div>    
                         <div class="uk-form-group">
                             <label class="uk-form-label"> Email</label>
 
@@ -66,11 +70,7 @@
                                </router-link>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div v-if="message" class="alert alert-danger" role="alert">
-                                {{message}}
-                            </div>
-                        </div>
+                        
 
                     </form>
                 </div><!--  End column two -->
@@ -148,13 +148,27 @@
                         else {
                             this.loading = false
                             this.loadingLabel = 'LOGIN'
-                            console.error(e)    
-                            this.$swal('Login gagal', '', 'error')
-                            setTimeout(() => {
-                                this.$swal.close()
-                            }, 3000)
+                            if(e.response) {
+                                console.error(e.response);
+                                for(var key in e.response.data) {
+                                    this.message += '' + e.response.data[key]
+                                }
 
-                            return false
+                                this.$swal(this.message, '', 'error')
+                                setTimeout(() => {
+                                    this.$swal.close()
+                                    this.message = ''
+                                }, 1500)
+                            }
+                            else {
+                                this.$swal('Login gagal', '', 'error')
+                                console.error(e)
+                                setTimeout(() => {
+                                    this.$swal.close()
+                                }, 3000)
+
+                                return false
+                            }
                         }
                     })
                 }

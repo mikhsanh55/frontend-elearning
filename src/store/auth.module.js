@@ -1,5 +1,5 @@
 import authService from '../services/auth.service'
-import UserService from '../services/user.service'
+
 const user = JSON.parse(localStorage.getItem('user'))
 const initialState = user ? {
 	status: {loggedIn: true},

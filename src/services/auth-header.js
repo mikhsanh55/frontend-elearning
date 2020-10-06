@@ -4,12 +4,12 @@ export default function authHeader() {
 	if(user && user.token) {
 		return { 
 			'Access-Control-Allow-Origin': '*',
-			Authorization: 'Bearer ' + user.token 
+			Authorization: 'Bearer ' + user.token ,
 		}
 	}
 	else {
 		return {
-			'Access-Control-Allow-Origin': '*'
+			'Access-Control-Allow-Origin': '*',
 		}
 	}
 }
