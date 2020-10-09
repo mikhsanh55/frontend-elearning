@@ -22406,3 +22406,7 @@ select[class~=bs-select-hidden] {
 .text-color {
 	color: #1e824c !important;
 }
+.e
+.bg-submitted {
+	background-color: #F3F6F9;
+}

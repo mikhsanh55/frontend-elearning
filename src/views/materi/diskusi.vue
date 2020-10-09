@@ -74,7 +74,7 @@
 							<input type="file" @change="checkFile" name="attach-file" class="d-none attach-file-input" ref="attach-file-input">
 						</div>
 						<div class="col-10 msg-section">
-							<input type="text" name="msg" class="form-control m-0 text-msg" placeholder="Ketikan sesuatu...">
+							<input type="text" name="msg" class="form-control m-0 text-msg" placeholder="Ketikan sesuatu..." v-model="textMsg">
 							<a href="#" @click.prevent="attachFile" class="attach-file text-secondary attach-file-mobile">
 								<i :class="fileIcon"></i>
 							</a>
@@ -110,7 +110,8 @@
 		data() {
 			return {
 				fileIcon: 'uil-paperclip',
-				loadingSend: false
+				loadingSend: false,
+				textmsg: ''
 			}
 		},
 		methods: {
@@ -123,7 +124,11 @@
 			sendMsg() {
 				// Add attr disabled button
 				this.loadingSend = true
-				setTimeout(() => this.loadingSend = false, 1000)
+				setTimeout(() => {
+					this.loadingSend = false
+					this.textMsg = ''
+					this.fileIcon = 'uil-paperclip'
+				}, 1000)
 			}
 		}
 	}

@@ -74,7 +74,7 @@ let router = new Router({
         }
       ]
    },
-   {
+   { // MATERI ROUTES
       path: '/materi/:kode_mapel',
       component: {
         render(c) {
@@ -96,6 +96,26 @@ let router = new Router({
           path: 'diskusi/:id_kelas',
           name: 'DiskusiMateri',
           component: () => import('@/views/materi/diskusi')
+        }
+      ]
+   },
+   { // TUGAS ROUTES
+      path: '/tugas',
+      component: {
+        render(c) {
+          return c('router-view')
+        }
+      },
+      children: [
+        {
+          path: '',
+          name: 'Tugas',
+          component: () => import('@/views/tugas/index')
+        },
+        {
+          path: 'detail/:id',
+          name: 'DetailTugas',
+          component: () => import('@/views/tugas/detail')
         }
       ]
    }
