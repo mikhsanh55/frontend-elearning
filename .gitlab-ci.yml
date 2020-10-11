@@ -1,0 +1,13 @@
+stages:
+    - test
+    - build
+    
+test_branch:
+    stage: test
+    script: echo proses berjalan
+    
+development_branch:
+    stage: build
+    script:
+        - npm install
+        - npm build
