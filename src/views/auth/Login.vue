@@ -82,7 +82,7 @@
 	</section>
 </template>
 <script type="text/javascript">
-	import User from '@/models/User'
+	import User from '@/models/user'
     import Footer from '@/components/Footer'
 
 	export default {
