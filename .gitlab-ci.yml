@@ -12,5 +12,5 @@ development_branch:
         - development
     script:
         - cd /var/www/sman5bdg/front-learn-vuejs
-        - git pull origin development
+        - sudo git pull origin development
         - sudo npm run build
