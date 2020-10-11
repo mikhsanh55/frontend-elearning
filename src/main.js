@@ -48,7 +48,7 @@ Vue.use(IconsPlugin)
 
 // Set localStorage API URL
 // localStorage.setItem('API_URL', 'https://api.lms-sman5bdg.online/');
-localStorage.setItem('API_URL', 'http://localhost:8000/');
+localStorage.setItem('API_URL', 'https://api.lms-sman5bdg.online');
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
