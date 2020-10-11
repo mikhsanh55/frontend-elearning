@@ -1,13 +1,16 @@
 stages:
     - test
-    - build
+    - development
     
 test_branch:
     stage: test
     script: echo proses berjalan
     
 development_branch:
-    stage: build
+    stage: development
+    only: 
+        - development
     script:
-        - npm install
-        - npm build
+        - cd /var/www/sman5bdg/front-learn-vuejs
+        - git pull origin development
+        - sudo npm run build
