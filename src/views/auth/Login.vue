@@ -133,43 +133,30 @@
                         }, 1500)
                     })
                     .catch(e => {
-                        if(this.user.email === 'siswa@gmail.com' && this.user.password === 'siswa') {
-                            this.$store.dispatch('auth/loginPassed', this.user)
-                            .then(res => {
-                                this.loading = false
-                                this.loadingLabel = 'LOGIN'
-                                this.$swal('Selamat Datang', '', 'success')
-                                setTimeout(() => {
-                                    this.$swal.close()
-                                    this.$router.replace('/kelas')
-                                }, 1500)
-                            })
+                        this.loading = false
+                        this.loadingLabel = 'LOGIN'
+                        if(e.response) {
+                            console.error(e.response);
+                            for(var key in e.response.data) {
+                                this.message += '' + e.response.data[key]
+                            }
+
+                            this.$swal(this.message, '', 'error')
+                            setTimeout(() => {
+                                this.$swal.close()
+                                this.message = ''
+                            }, 1500)
                         }
                         else {
-                            this.loading = false
-                            this.loadingLabel = 'LOGIN'
-                            if(e.response) {
-                                console.error(e.response);
-                                for(var key in e.response.data) {
-                                    this.message += '' + e.response.data[key]
-                                }
+                            this.$swal('Login gagal', '', 'error')
+                            console.error(e)
+                            setTimeout(() => {
+                                this.$swal.close()
+                            }, 3000)
 
-                                this.$swal(this.message, '', 'error')
-                                setTimeout(() => {
-                                    this.$swal.close()
-                                    this.message = ''
-                                }, 1500)
-                            }
-                            else {
-                                this.$swal('Login gagal', '', 'error')
-                                console.error(e)
-                                setTimeout(() => {
-                                    this.$swal.close()
-                                }, 3000)
-
-                                return false
-                            }
+                            return false
                         }
+                        
                     })
                 }
             }
