@@ -1,5 +1,6 @@
 import axios from 'axios'
 import authHeader from './auth-header'
+localStorage.setItem('API_URL', 'https://api.lms-sman5bdg.online/')
 const API_URL = localStorage.getItem('API_URL')
 /*
 * This helper class is using for auth stuff
