@@ -54,6 +54,7 @@
 	</section>
 </template>
 <script type="text/javascript">
+	import UserService from '@/services/user.service'
 	import Header from '@/components/Header'
 	import Footer from '@/components/Footer'
 	import Headline from '@/components/Headline'
@@ -71,17 +72,18 @@
 			}
 		},
 		methods: {
-			getListMapel() {
-				this.mapels = [
-					{url: '/materi/192j9s128us', img: '1.png', name: 'Pendidikan Islam', keterangan: '', nama_guru: 'Heri Suherman S.Pd'},
-					{url: '/materi/192j9s128us', img: '2.png', name: 'Bahasa Indonesia', keterangan: '', nama_guru: 'Adil Teguh S.Pd'},
-					{url: '/materi/192j9s128us', img: '3.png', name: 'Bahasa Inggris', keterangan: '', nama_guru: 'Adil Teguh S.Pd'},
-					{url: '/materi/192j9s128us', img: '4.png', name: 'Matematika', keterangan: '', nama_guru: 'Heri Suherman S.Pd'},
-					{url: '/materi/192j9s128us', img: '5.png', name: 'Fisika', keterangan: '', nama_guru: 'Adil Teguh S.Pd'},
-					{url: '/materi/192j9s128us', img: '6.png', name: 'Kimia', keterangan: '', nama_guru: 'Heri Suherman S.Pd'},
-					{url: '/materi/192j9s128us', img: '7.png', name: 'Biologi', keterangan: '', nama_guru: 'Adil Teguh S.Pd'},
-					{url: '/materi/192j9s128us', img: '8.png', name: 'Seni Budaya', keterangan: '', nama_guru: 'Heri Suherman S.Pd'},
-				]
+			async getListMapel() {
+				// this.mapels = [
+				// 	{url: '/materi/192j9s128us', img: '1.png', name: 'Pendidikan Islam', keterangan: '', nama_guru: 'Heri Suherman S.Pd'},
+				// 	{url: '/materi/192j9s128us', img: '2.png', name: 'Bahasa Indonesia', keterangan: '', nama_guru: 'Adil Teguh S.Pd'},
+				// 	{url: '/materi/192j9s128us', img: '3.png', name: 'Bahasa Inggris', keterangan: '', nama_guru: 'Adil Teguh S.Pd'},
+				// 	{url: '/materi/192j9s128us', img: '4.png', name: 'Matematika', keterangan: '', nama_guru: 'Heri Suherman S.Pd'},
+				// 	{url: '/materi/192j9s128us', img: '5.png', name: 'Fisika', keterangan: '', nama_guru: 'Adil Teguh S.Pd'},
+				// 	{url: '/materi/192j9s128us', img: '6.png', name: 'Kimia', keterangan: '', nama_guru: 'Heri Suherman S.Pd'},
+				// 	{url: '/materi/192j9s128us', img: '7.png', name: 'Biologi', keterangan: '', nama_guru: 'Adil Teguh S.Pd'},
+				// 	{url: '/materi/192j9s128us', img: '8.png', name: 'Seni Budaya', keterangan: '', nama_guru: 'Heri Suherman S.Pd'},
+				// ]
+				this.mapels = await UserService.getMapel()
 			},
 			getPict(imageName) {
 				return require('./../../images/course/' + imageName)

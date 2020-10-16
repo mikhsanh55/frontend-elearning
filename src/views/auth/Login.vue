@@ -116,48 +116,51 @@
             }
         },
         methods: {
+            errorLogin(e) {
+                this.loading = false
+                this.loadingLabel = 'LOGIN'
+                if(e.response) {
+                    console.error(e.response);
+                    for(var key in e.response.data) {
+                        this.message += '' + e.response.data[key]
+                    }
+
+                    this.$swal(this.message, '', 'error')
+                    setTimeout(() => {
+                        this.$swal.close()
+                        this.message = ''
+                    }, 1500)
+                    return false
+                }
+                else {
+                    this.$swal('Login gagal', e.msg, 'error')
+                    console.error(e)
+                    setTimeout(() => {
+                        this.$swal.close()
+                    }, 3000)
+
+                    return false
+                }
+            },
+            passedLogin(res) {
+                this.loading = false
+                this.loadingLabel = 'LOGIN'
+                this.$swal('Selamat Datang di E-Learning', 'Belajar jadi mudah', 'success')
+
+                setTimeout(() => {
+                    this.$swal.close()
+                    this.$router.push('/kelas')
+                }, 1500)
+                return true
+            },
             handleLogin() {
                 this.loading = 'disabled'
                 this.loadingLabel = 'Loading...'
 
                 if(this.user.email && this.user.password) {
                     this.$store.dispatch('auth/login', this.user)
-                    .then(() => {
-                        this.loading = false
-                        this.loadingLabel = 'LOGIN'
-                        this.$swal('Selamat Datang di E-Learning', 'Belajar jadi mudah', 'success')
-
-                        setTimeout(() => {
-                            this.$swal.close()
-                            this.$router.push('/kelas')
-                        }, 1500)
-                    })
-                    .catch(e => {
-                        this.loading = false
-                        this.loadingLabel = 'LOGIN'
-                        if(e.response) {
-                            console.error(e.response);
-                            for(var key in e.response.data) {
-                                this.message += '' + e.response.data[key]
-                            }
-
-                            this.$swal(this.message, '', 'error')
-                            setTimeout(() => {
-                                this.$swal.close()
-                                this.message = ''
-                            }, 1500)
-                        }
-                        else {
-                            this.$swal('Login gagal', '', 'error')
-                            console.error(e)
-                            setTimeout(() => {
-                                this.$swal.close()
-                            }, 3000)
-
-                            return false
-                        }
-                        
-                    })
+                    .then(res => this.passedLogin(res))
+                    .catch(e => this.errorLogin(e))
                 }
             }
         }

@@ -1,7 +1,8 @@
 import axios from 'axios'
 import authHeader from './auth-header'
 
-const API_URL = 'https://localhost:8000'
+const API_URL = localStorage.getItem('API_URL'),
+		infoUser = JSON.parse(localStorage.getItem('user'))
 
 class UserService {
 	getProfile() {
@@ -17,7 +18,9 @@ class UserService {
 		]
 	}
 	getMapel() {
-		
+		return axios.get(API_URL + 'materi/find/13', {
+			headers: authHeader()
+		})
 	}
 }
 
