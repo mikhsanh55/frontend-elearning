@@ -47,8 +47,10 @@ Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 
 // Set localStorage API URL
-let activeEnv = 'production',
+let activeEnv = 'local',
 	api = activeEnv == 'local' ? 'http://localhost:8000/' : 'https://api.lms-sman5bdg.online/'
+
+localStorage.removeItem('API_URL');
 localStorage.setItem('API_URL', api);
 
 /* eslint-disable no-new */

@@ -1,6 +1,7 @@
 import axios from 'axios'
 import authHeader from './auth-header'
 // localStorage.setItem('API_URL', 'https://api.lms-sman5bdg.online/')
+localStorage.setItem('API_URL', 'http://localhost:8000/')
 const API_URL = localStorage.getItem('API_URL')
 /*
 * This helper class is using for auth stuff
@@ -9,6 +10,10 @@ class AuthService {
 	constructor() {
 		this.initialize()
 		this.data = {}
+	}
+
+	setAPIUrl(api) {
+		this.API_URL = api
 	}
 
 	initialize() {
@@ -23,9 +28,7 @@ class AuthService {
 			this.formData.append('email', user.email)
 			this.formData.append('password', user.password)
 
-			http.open("POST", API_URL + 'auth/login')
-			http.setRequestHeader('Access-Control-Allow-Origin', '*')
-			http.overrideMimeType('application/json')
+			http.open("POST", this.API_URL + 'auth/login')
 
 			http.onload = function() {
 				if(this.status >= 200 && this.status < 300) {
@@ -66,6 +69,22 @@ class AuthService {
 			}
 
 			http.send(this.formData)
+
+
+			// axios.post('http://localhost:8000/auth/login', {
+			// 	email: user.email,
+			// 	password: user.password
+			// }, {
+			// 	headers: authHeader()
+			// })
+			// .then(response => {
+			// 	if(response.status) {
+			// 		localStorage.setItem('user', JSON.stringify(response.data))
+			// 	}
+
+			// 	resolve(response.data)
+			// })
+			// .catch(e => reject(e))
 		})
 	}
 	logout() {

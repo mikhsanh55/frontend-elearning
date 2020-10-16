@@ -16,6 +16,8 @@ export const auth = {
 	state: initialState,
 	actions: {
 		login({ commit }, user) {
+			var API_URL = localStorage.getItem('API_URL')
+			authService.setAPIUrl(API_URL)
 			return authService.login(user)
 			.then(user => {
 				commit('LOGIN_SUCCESS', user) // update state user with loggedIn data

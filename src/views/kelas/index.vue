@@ -28,15 +28,14 @@
 	                                                <div class="course-card-body">
 	                                                    <div class="course-card-info">
 	                                                        <div>
-	                                                            <span class="catagroy">{{kelas}}</span>
+	                                                            <span class="catagroy">{{mapel.kelas}}</span>
 	                                                        </div>
 	                                                    </div>
-	            	                                        <h4>{{mapel.name}}</h4>
-	            	                                        <p>{{mapel.keterangan}}</p>
+	            	                                        <h4>{{mapel.nama_mapel}}</h4>
 	                                                    <div class="course-card-footer">
 	                                                        <h5> 
 	                                                        	<i class="icon-feather-user"></i>
-	                                                        	{{mapel.nama_guru}}
+	                                                        	{{mapel.guru}}
 	                                                        </h5>
 	                                                    </div>
 	                                                </div>
@@ -72,18 +71,24 @@
 			}
 		},
 		methods: {
-			async getListMapel() {
-				// this.mapels = [
-				// 	{url: '/materi/192j9s128us', img: '1.png', name: 'Pendidikan Islam', keterangan: '', nama_guru: 'Heri Suherman S.Pd'},
-				// 	{url: '/materi/192j9s128us', img: '2.png', name: 'Bahasa Indonesia', keterangan: '', nama_guru: 'Adil Teguh S.Pd'},
-				// 	{url: '/materi/192j9s128us', img: '3.png', name: 'Bahasa Inggris', keterangan: '', nama_guru: 'Adil Teguh S.Pd'},
-				// 	{url: '/materi/192j9s128us', img: '4.png', name: 'Matematika', keterangan: '', nama_guru: 'Heri Suherman S.Pd'},
-				// 	{url: '/materi/192j9s128us', img: '5.png', name: 'Fisika', keterangan: '', nama_guru: 'Adil Teguh S.Pd'},
-				// 	{url: '/materi/192j9s128us', img: '6.png', name: 'Kimia', keterangan: '', nama_guru: 'Heri Suherman S.Pd'},
-				// 	{url: '/materi/192j9s128us', img: '7.png', name: 'Biologi', keterangan: '', nama_guru: 'Adil Teguh S.Pd'},
-				// 	{url: '/materi/192j9s128us', img: '8.png', name: 'Seni Budaya', keterangan: '', nama_guru: 'Heri Suherman S.Pd'},
-				// ]
-				this.mapels = await UserService.getMapel()
+			getListMapel() {
+				UserService.getMapel()
+				.then(res => {
+					res = JSON.parse(res)
+					res.data.forEach((d, index) => {
+						d.img = '6.png'
+						d.url = `mapel/detail/${d.id_mapel}`
+					})
+					this.mapels = res.data
+					console.log(this.mapels.length)
+
+					return true
+				})
+				.catch(e => {
+					this.$swal('Gagal saat mengambil data', '', 'error')
+					console.error(e)
+					return false
+				}) 
 			},
 			getPict(imageName) {
 				return require('./../../images/course/' + imageName)

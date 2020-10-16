@@ -125,7 +125,7 @@
                         this.message += '' + e.response.data[key]
                     }
 
-                    this.$swal(this.message, '', 'error')
+                    this.$swal(this.message, '', 'warn')
                     setTimeout(() => {
                         this.$swal.close()
                         this.message = ''
@@ -133,7 +133,7 @@
                     return false
                 }
                 else {
-                    this.$swal('Login gagal', e.msg, 'error')
+                    this.$swal('Login gagal', '', 'error')
                     console.error(e)
                     setTimeout(() => {
                         this.$swal.close()
