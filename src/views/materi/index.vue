@@ -29,16 +29,15 @@
 	                                    <div class="course-card-body">
 	                                        <div class="course-card-info">
 	                                            <div>
-	                                                <span class="mapel">{{materi.mapel}}</span>
+	                                                <span class="mapel">{{materi.nama_mapel}}</span>
 	                                            </div>
 	                                        </div>
-	                                        <h4>{{materi.name}}</h4>
-	                                        <span class="btn btn-primary btn-sm">Detail</span>
-	                                        <span class="btn btn-danger btn-sm">PPT</span>
-	                                        <span class="btn btn-success btn-sm">PDF</span>
-	                                         <p class="text-secondary">{{materi.guru}}</p>
+	                                        <h4>{{materi.title}}</h4>
+	                                        <button to="/" class="btn btn-primary btn-sm">Detail</button>
+	                                        <button @click.prevent="showFiles(materi.id, 'pdf')" class="btn btn-danger btn-sm">PPT</button>
+	                                        <button @click.prevent="showFiles(materi.id, 'ppt')" class="btn btn-success btn-sm">PDF</button>
 	                                        <div class="course-card-footer">
-	                                            <h5> <i class="icon-feather-clock"></i> <span class="btn-small btn-success"> Aktif </span> {{materi.startDate + ' - ' + materi.endDate}} </h5>
+	                                            <!-- <h5> <i class="icon-feather-clock"></i> <span class="btn-small btn-success"> Aktif </span> {{materi.startDate + ' - ' + materi.endDate}} </h5> -->
 	                                        </div>
 	                                    </div>
 
@@ -67,36 +66,72 @@
 
 	    </div>
 	    <Footer />
+	    <!-- Modal for Video -->
+	    <b-modal title="Files" id="files-modal" hide-footer>
+	    	<div v-html="filesModalContent"></div>
+	    </b-modal>
 	</section>
 </template>
 <script type="text/javascript">
+	import Materi from '@/models/materi'
+	import UserService from '@/services/user.service'
 	import Header from '@/components/Header'
 	import Footer from '@/components/Footer'
+	import {BModal, VBModal} from 'bootstrap-vue'
+
 	export default {
 		name: 'Materi',
 		data() {
 			return {
 				materis: [],
-				kodeMapel: 0
+				kodeMapel: 0,
+				filesModalContent: `<a class="text-primary" href="https://sites.google.com/site/kkgmgmpmatematika/1-SoalCeritaPenjumlahan.pdf" download>
+					<i class="icon-line-awesome-file-pdf-o text-danger mr-2"></i><span>File Materi.pdf</span>
+				</a>`
 			}
 		},
 		components: {
 			Header,
-			Footer
+			Footer,
+			'b-modal': BModal
 		},
 		methods: {
 			getListMateri() {
 				this.kodeMapel = this.$route.params.kode_mapel
-				this.materis = [
-					{id: '192w21sk', id_mapel: 23, mapel: 'Biologi', name: 'Simbiosis Mutualisme', guru: 'Hendrawan S.Pd', startDate: '25-06-06', endDate: '27-06-06', img: 'p-1.png'},
-					{id: '192w21sk', id_mapel: 23, mapel: 'Biologi', name: 'Simbiosis Parasitisme', guru: 'Hendrawan S.Pd', startDate: '28-06-06', endDate: '30-06-06', img: 'p-2.png'},
-					{id: '192w21sk', id_mapel: 23, mapel: 'Biologi', name: 'Simbiosis Komensalisme', guru: 'Hendrawan S.Pd', startDate: '01-07-06', endDate: '03-07-06', img: 'p-3.png'},
-					{id: '192w21sk', id_mapel: 23, mapel: 'Biologi', name: 'Simbiosis Parasitisme', guru: 'Hendrawan S.Pd', startDate: '28-06-06', endDate: '30-06-06', img: 'p-2.png'},
-					{id: '192w21sk', id_mapel: 23, mapel: 'Biologi', name: 'Simbiosis Komensalisme', guru: 'Hendrawan S.Pd', startDate: '01-07-06', endDate: '03-07-06', img: 'p-3.png'}
-				]
+				UserService.getMateriByMapel(this.kodeMapel)
+				.then(res => {
+					res = JSON.parse(res)
+					this.materis = res.data
+					this.materis.forEach((data, index) => {
+						data.img = '7.png'
+					})
+				})
+				.catch(e => {
+					this.$swal('Gagal saat mengambil data', 'Hubungi tim support LMS', 'error')
+					console.error(e)
+					return false
+				})
 			},
 			getPict(filePath) {
 				return require('../../images/course/' + filePath)
+			},
+			showFiles(idMateri, type = 'pdf') {
+				// Materi.getListFiles(idMateri, type)
+				// .then(res => {
+				// 	res.data.forEach((d, index) => {
+				// 		this.filesModalContent += `<a href="#" download class="m-3 text-primary">
+				// 			<i class="fas fa-pdf-o mr-2"></i><span>${d.file}</span>
+				// 		</a>`
+				// 	})
+					
+				// })
+				// .catch(e => {
+				// 	this.$swal('Tidak dapat mengunduh file', e.msg, 'error')
+				// 	console.error(e)
+				// 	return false
+				// })
+
+				this.$bvModal.show('files-modal')
 			}
 		},
 		created() {

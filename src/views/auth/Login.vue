@@ -133,7 +133,11 @@
                     return false
                 }
                 else {
-                    this.$swal('Login gagal', '', 'error')
+                    var errMsg = ''
+                    if(e.msg) {
+                        errMsg = e.msg
+                    }
+                    this.$swal('Login gagal', errMsg, 'error')
                     console.error(e)
                     setTimeout(() => {
                         this.$swal.close()

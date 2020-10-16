@@ -77,7 +77,7 @@
 					res = JSON.parse(res)
 					res.data.forEach((d, index) => {
 						d.img = '6.png'
-						d.url = `mapel/detail/${d.id_mapel}`
+						d.url = `materi/${d.id_mapel}`
 					})
 					this.mapels = res.data
 					console.log(this.mapels.length)
@@ -95,7 +95,14 @@
 			}
 		},
 		created() {
-			this.getListMapel()
+			if(localStorage.getItem('reload-kelas') == 0) {
+				localStorage.setItem('reload-kelas', 1)
+				window.location.reload()
+			}
+			else {
+				this.getListMapel()	
+			}
+			
 		}
 	}
 </script>

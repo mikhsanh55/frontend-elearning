@@ -20,6 +20,7 @@ export const auth = {
 			authService.setAPIUrl(API_URL)
 			return authService.login(user)
 			.then(user => {
+				localStorage.setItem('user', user)
 				commit('LOGIN_SUCCESS', user) // update state user with loggedIn data
 				return Promise.resolve(user) // continue user data to view
 			})
