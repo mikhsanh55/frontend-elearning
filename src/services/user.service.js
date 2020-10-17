@@ -27,7 +27,7 @@ class UserService {
 		return new Promise((resolve, reject) => {
 			var http = this.xhr,
 				userId = JSON.parse(localStorage.getItem('user'))
-
+			this.apiUrl = localStorage.getItem('API_URL')
 			http.open("GET", this.apiUrl + `mapel/get_mapel/${userId.id_akun}`)
 			http.setRequestHeader('Authorization', `bearer ${userId.token}`)
 			http.overrideMimeType('application/json')

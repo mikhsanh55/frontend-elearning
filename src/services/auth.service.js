@@ -1,7 +1,6 @@
 import axios from 'axios'
 import authHeader from './auth-header'
 // localStorage.setItem('API_URL', 'https://api.lms-sman5bdg.online/')
-localStorage.setItem('API_URL', 'http://localhost:8000/')
 const API_URL = localStorage.getItem('API_URL')
 /*
 * This helper class is using for auth stuff
@@ -27,7 +26,7 @@ class AuthService {
 
 			this.formData.append('email', user.email)
 			this.formData.append('password', user.password)
-
+			this.API_URL = localStorage.getItem('API_URL')
 			http.open("POST", this.API_URL + 'auth/login')
 
 			http.onload = function() {
